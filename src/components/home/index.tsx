@@ -1,0 +1,17 @@
+import Cards from "../cards";
+import Data from "../data";
+import Feature from "../features";
+import Footer from "../footer";
+import Navbar from "../navbar";
+
+const HomeComponent = () => {
+  return <div>
+    <Navbar/>
+    <Data/>
+    <Cards/>
+    <Feature/>
+    <Footer/>
+  </div>;
+};
+
+export default HomeComponent;
