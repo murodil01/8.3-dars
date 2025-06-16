@@ -32,10 +32,5 @@ export const useLoginMutation = () => {
 
       console.log("Login Success:", data);
     },
-
-    onError: (error: any) => {
-      console.error("Login failed:", error);
-      message.error(error?.message || "Login failed");
-    },
   });
 };

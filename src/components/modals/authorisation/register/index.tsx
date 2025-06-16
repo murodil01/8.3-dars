@@ -8,8 +8,8 @@ const { Text } = Typography;
 const Register = () => {
   const [loading, setLoading] = useState(false);
 
-  const onFinish = (values: any) => {
-    console.log("Register data:", values);
+  const onFinish = () => {
+    console.log("Register data:",);
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
