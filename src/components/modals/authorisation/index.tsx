@@ -1,5 +1,5 @@
 import { Modal } from "antd";
-import { useReduxSelector } from "../../../hooks/useReduxSelector";
+import { useReduxSelector } from "../../../hooks/useRedux";
 import { useDispatch } from "react-redux";
 import { setOpenAuthoritastionModalVisiblity } from "../../../redux/modal-slice";
 import Login from "./login";
@@ -10,7 +10,7 @@ const AuthorisationModal = () => {
   const { openAuthorisationModalVisiblty } = useReduxSelector(
     (state) => state.modalSlice
   );
-
+    
   const dispatch = useDispatch();
   const [editPage, setEditPage] = useState("login");
 

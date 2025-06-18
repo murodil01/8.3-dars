@@ -11,6 +11,7 @@ export const useQueryHandler = ({ pathname, url, params }: QueryType) => {
   const axios = useAxios();
   return useQuery({
     queryKey: [pathname],
+    //queryKey: [pathname],
     queryFn: () => axios({ url, params }),
   });
 };

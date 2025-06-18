@@ -1,7 +1,7 @@
 import { Icons } from "../../assets/icons";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setOpenAuthoritastionModalVisiblity } from "../../redux/modal-slice";
 import type { AuthType } from "../../@types";
@@ -9,12 +9,14 @@ import Cookies from "js-cookie";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState<Partial<AuthType>>({});
+  
 
-  const userCookie = Cookies.get("user");
-  const data: AuthType = userCookie
-    ? JSON.parse(userCookie)
-    : { name: "", email: "", token: "" }; 
+  useEffect(()=> {if (Cookies.get("user")) {
+    const data: AuthType = JSON.parse(Cookies.get("user") as string);
+    setUser(data);
+  }}, [])
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
     { label: "Home", to: "/" },
@@ -50,7 +52,7 @@ const Navbar = () => {
         >
           <LogOut className="w-[20px] h-[20px] text-white" />
           <span className="font-medium text-base leading-none text-white">
-            {data.name ? data.name : "Login"}
+            {user.name ? user.name : "Login"}
           </span>
         </button>
 

@@ -1,4 +1,4 @@
-import { useReduxSelector } from '../../hooks/useReduxSelector';
+import { useReduxSelector } from '../../hooks/useRedux';
 import AuthorisationModal from './authorisation';
 
 const Modals = () => {

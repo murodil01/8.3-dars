@@ -1,19 +1,27 @@
-import { useState } from "react";
 import { Button, Form, Input, Typography, Divider } from "antd";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { Loader } from "lucide-react";
+import { notificationApi } from "../../../../generic/notificationApi";
+import { useRegisterMutation } from "../../../../hooks/useQueryAction";
 
 const { Text } = Typography;
 
 const Register = () => {
-  const [loading, setLoading] = useState(false);
+  const notify = notificationApi();
+  const {mutate, isPending} = useRegisterMutation();
 
-  const onFinish = () => {
-    console.log("Register data:",);
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+  const login = (e: {
+    email: string;
+    password: string;
+    name: string;
+    surname: string;
+    confirm_password: string;
+  }) => {
+    if (e.password !== e.confirm_password) {
+      return notify("wrong_confirm_password");
+    }
+    mutate(e);
+    console.log(e);
   };
 
   return (
@@ -22,10 +30,20 @@ const Register = () => {
         Enter your username, email, and password to register.
       </Text>
 
-      <Form layout="vertical" onFinish={onFinish}>
-        <Form.Item name="username" rules={[{ required: true }]}>
+      <Form onFinish={login}>
+        
+        <Form.Item name="name" rules={[{ required: true }]}>
           <Input
-            placeholder="Enter your username"
+            placeholder="Enter your name"
+            size="large"
+            className="rounded"
+            autoComplete="off"
+          />
+        </Form.Item>
+
+        <Form.Item name="surname" rules={[{ required: true }]}>
+          <Input
+            placeholder="Enter your surname"
             size="large"
             className="rounded"
             autoComplete="off"
@@ -53,10 +71,8 @@ const Register = () => {
         </Form.Item>
 
         <Form.Item
-          name="confirmPassword"
-          rules={[
-            { required: true, message: "Please confirm your password!" },
-          ]}
+          name="confirm_password"
+          rules={[{ required: true, message: "Please confirm your password!" }]}
         >
           <Input.Password
             placeholder="Confirm your password"
@@ -75,9 +91,9 @@ const Register = () => {
               borderColor: "#46A358",
               color: "white",
             }}
-            disabled={loading}
+            disabled={isPending}
           >
-            {loading ? (
+            {isPending ? (
               <Loader className="animate-spin" size={20} />
             ) : (
               "Register"

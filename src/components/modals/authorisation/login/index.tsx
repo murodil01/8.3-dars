@@ -14,11 +14,13 @@ const Login = () => {
 
   return (
     <div className="w-full bg-white p-6 rounded-lg">
+
       <Text className="block text-center mb-6 text-gray-500">
         Enter your email and password to login.
       </Text>
 
       <Form layout="vertical" onFinish={login}>
+
         <Form.Item
           name="email"
           rules={[
@@ -45,7 +47,7 @@ const Login = () => {
         </Form.Item>
 
         <div className="flex justify-end mb-4">
-          <a href="#" className="text-green-500 hover:underline text-sm">
+          <a href="#" className="!text-[#46a358] hover:underline text-sm">
             Forgot Password?
           </a>
         </div>

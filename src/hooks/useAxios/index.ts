@@ -33,4 +33,4 @@ export const useAxios = () => {
     }).then((data) => data.data.data);
   };
   return request;
-};
+};  
