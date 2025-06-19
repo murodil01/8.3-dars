@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography, Divider } from "antd";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { Loader } from "lucide-react";
-import { useLoginMutation } from "../../../../hooks/useQueryAction";
+import { useLoginMutation, useLoginWithGoogleMutation } from "../../../../hooks/useQueryAction";
 
 const { Text } = Typography;
 
@@ -11,6 +11,8 @@ const Login = () => {
   const login = (e: { email: string; password: string }) => {
     mutate(e); 
   };
+
+  const {mutate: mutateGoogle} = useLoginWithGoogleMutation();
 
   return (
     <div className="w-full bg-white p-6 rounded-lg">
@@ -76,8 +78,9 @@ const Login = () => {
           block
           size="large"
           className="border border-gray-300 text-black"
+          onClick={() => mutateGoogle()}
         >
-          Continue with Google
+          Login with Google
         </Button>
         <Button
           icon={<FacebookFilled />}
@@ -85,7 +88,7 @@ const Login = () => {
           size="large"
           className="border border-gray-300 text-black"
         >
-          Continue with Facebook
+          Login with Facebook
         </Button>
       </div>
     </div>

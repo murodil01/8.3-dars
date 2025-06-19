@@ -2,13 +2,13 @@ import { Button, Form, Input, Typography, Divider } from "antd";
 import { GoogleOutlined, FacebookFilled } from "@ant-design/icons";
 import { Loader } from "lucide-react";
 import { notificationApi } from "../../../../generic/notificationApi";
-import { useRegisterMutation } from "../../../../hooks/useQueryAction";
+import { useRegisterMutation, useRegisterWithGoogleMutation } from "../../../../hooks/useQueryAction";
 
 const { Text } = Typography;
 
 const Register = () => {
   const notify = notificationApi();
-  const {mutate, isPending} = useRegisterMutation();
+  const { mutate, isPending } = useRegisterMutation();
 
   const login = (e: {
     email: string;
@@ -21,8 +21,9 @@ const Register = () => {
       return notify("wrong_confirm_password");
     }
     mutate(e);
-    console.log(e);
   };
+
+  const {mutate: mutateGoogle} = useRegisterWithGoogleMutation();
 
   return (
     <div className="w-full bg-white p-6 rounded-lg">
@@ -31,7 +32,6 @@ const Register = () => {
       </Text>
 
       <Form onFinish={login}>
-        
         <Form.Item name="name" rules={[{ required: true }]}>
           <Input
             placeholder="Enter your name"
@@ -112,8 +112,9 @@ const Register = () => {
           block
           size="large"
           className="border border-gray-300 text-black"
+          onClick={() => mutateGoogle()}
         >
-          Continue with Google
+          Register with Google
         </Button>
         <Button
           icon={<FacebookFilled />}
@@ -121,7 +122,7 @@ const Register = () => {
           size="large"
           className="border border-gray-300 text-black"
         >
-          Continue with Facebook
+          Register with Facebook
         </Button>
       </div>
     </div>

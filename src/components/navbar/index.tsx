@@ -47,7 +47,7 @@ const Navbar = () => {
 
         <button
           onClick={() => dispatch(setOpenAuthoritastionModalVisiblity())}
-          className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-[16px] 
+          className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-md
             flex items-center justify-center gap-2 hover:bg-green-700 transition-all duration-200"
         >
           <LogOut className="w-[20px] h-[20px] text-white" />

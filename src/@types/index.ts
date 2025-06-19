@@ -29,3 +29,23 @@ export interface AuthType {
   wishlist: [];
   _id: string;
 }
+
+export interface CategoriesType {
+  count: number;
+  route_path: string;
+  title: string;
+  _id: string;
+}
+
+export interface DataType<T> {
+  isLoading: boolean;
+  isError: boolean;
+  data?: T;
+}
+
+export interface DiscountFlowerType {
+  discoount_up_to: number;
+  id: number;
+  poster_image_url: string;
+  title: string;
+}
