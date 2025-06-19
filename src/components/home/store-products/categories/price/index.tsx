@@ -17,7 +17,7 @@ const Price = () => {
       <h2 className="mt-2 text-base font-semibold text-[#46A358]">
         Price: <span>0$ - 1000$</span>
       </h2>
-      <button className="mt-4 w-full bg-[#46A358] text-white py-2 rounded-md">
+      <button className="mt-4 w-[150px] bg-[#46A358] text-white py-2 rounded-md">
         <a className="text-white" href="">
           Filter
         </a>
