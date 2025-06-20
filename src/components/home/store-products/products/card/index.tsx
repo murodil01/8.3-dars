@@ -5,8 +5,16 @@ import {
   SearchOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { getData } from "../../../../../redux/shop-slice";
+import { useReduxSelector } from "../../../../../hooks/useRedux";
 
 const Card: FC<ProductsType> = (props) => {
+  const dispatch = useDispatch();
+  const { data } = useReduxSelector((state) => state.shopSlice);
+  console.log(data);
+  
+
   const style_icons: string =
     "bg-[#FFFFFF] w-[35px] h-[35px] flex rounded-lg justify-center items-center cursor-pointer text-[20px] shadow hover:scale-105 transition";
 
@@ -20,7 +28,7 @@ const Card: FC<ProductsType> = (props) => {
         />
 
         <div className="absolute bottom-4 gap-5 hidden group-hover:flex items-center">
-          <div className={style_icons}>
+          <div onClick={() => dispatch(getData(props))} className={style_icons}>
             <ShoppingCartOutlined className="text-[22px]" />
           </div>
 

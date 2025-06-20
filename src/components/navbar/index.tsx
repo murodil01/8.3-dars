@@ -6,16 +6,21 @@ import { useDispatch } from "react-redux";
 import { setOpenAuthoritastionModalVisiblity } from "../../redux/modal-slice";
 import type { AuthType } from "../../@types";
 import Cookies from "js-cookie";
+import { Badge } from "antd";
+import { useReduxSelector } from "../../hooks/useRedux";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [user, setUser] = useState<Partial<AuthType>>({});
-  
 
-  useEffect(()=> {if (Cookies.get("user")) {
-    const data: AuthType = JSON.parse(Cookies.get("user") as string);
-    setUser(data);
-  }}, [])
+  const { data } = useReduxSelector((state) => state.shopSlice);
+
+  useEffect(() => {
+    if (Cookies.get("user")) {
+      const data: AuthType = JSON.parse(Cookies.get("user") as string);
+      setUser(data);
+    }
+  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const navLinks = [
@@ -43,8 +48,11 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         <Search className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-        <ShoppingCart className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-
+        <Link to={"/shop"}>
+          <Badge count={data.length}>
+            <ShoppingCart className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
+          </Badge>
+        </Link>
         <button
           onClick={() => dispatch(setOpenAuthoritastionModalVisiblity())}
           className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-md
