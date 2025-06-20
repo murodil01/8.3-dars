@@ -6,13 +6,24 @@ import Card from "./card";
 import ProductsHeader from "./products-header";
 
 const Products = () => {
-  const {getParam} = useSearchParamsHandler();
+  const { getParam } = useSearchParamsHandler();
+
   const category = getParam("category") || "house-plants";
-  
+  const sort = getParam("sort") || "default-sorting";
+  const type = getParam("type") || "all-plants";
+  const range_min = getParam("range_min") || 0;
+  const range_max = getParam("range_max") || 1000;
+
   const { data, isLoading, isError }: DataType<ProductsType[]> =
     useQueryHandler({
-      pathname: `products-${category}`,
+      pathname: `products-${category}-${sort}-${type}-min-${range_min}-max-${range_max}`,
       url: `flower/category/${category}`,
+      params: {
+        type,
+        sort,
+        range_min,
+        range_max,
+      },
     });
   const { products_loader } = useLoader();
   return (

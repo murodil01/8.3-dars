@@ -13,6 +13,9 @@ const Categories = () => {
     });
   const { setParam, getParam } = useSearchParamsHandler();
   const category = getParam("category") || "house-plants";
+  const sort = getParam("sort") || "default-sorting";
+  const type = getParam("type") || "all-plants";
+
   const { categories_loader } = useLoader();
 
   return (
@@ -26,7 +29,9 @@ const Categories = () => {
           ? categories_loader()
           : data?.map((value) => (
               <div
-                onClick={() => setParam({ category: value.route_path })}
+                onClick={() =>
+                  setParam({ category: value.route_path, sort, type })
+                }
                 key={value._id}
                 className={`flex w-full p-2 justify-between text-base font-medium cursor-pointer hover:text-[#46A358] transition-colors ${
                   category === value.route_path && "text-[#46A358]"
