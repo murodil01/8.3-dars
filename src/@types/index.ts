@@ -49,3 +49,21 @@ export interface DiscountFlowerType {
   poster_image_url: string;
   title: string;
 }
+
+export interface ProductsType {
+  category: string;
+  comments: string[];
+  description: string;
+  detailed_images: string[];
+  discount: boolean;
+  discount_price: string;
+  main_image: string;
+  price: number;
+  rate: number;
+  short_description: string;
+  sold_times: number;
+  tags: [];
+  title: string;
+  views: number;
+  _id: string;
+}

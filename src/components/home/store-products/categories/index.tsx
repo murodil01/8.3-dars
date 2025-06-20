@@ -3,6 +3,7 @@ import { useQueryHandler } from "../../../../hooks/useQuery";
 import Discount from "../products/discount";
 import Price from "./price";
 import useLoader from "../../../../generic/loader";
+import { useSearchParamsHandler } from "../../../../hooks/useSearchParams";
 
 const Categories = () => {
   const { data, isLoading, isError }: DataType<CategoriesType[]> =
@@ -10,7 +11,8 @@ const Categories = () => {
       pathname: "categories",
       url: "flower/category",
     });
-
+  const { setParam, getParam } = useSearchParamsHandler();
+  const category = getParam("category") || "house-plants";
   const { categories_loader } = useLoader();
 
   return (
@@ -24,8 +26,11 @@ const Categories = () => {
           ? categories_loader()
           : data?.map((value) => (
               <div
+                onClick={() => setParam({ category: value.route_path })}
                 key={value._id}
-                className="flex w-full p-2 justify-between text-base font-medium cursor-pointer hover:text-[#46A358] transition-colors"
+                className={`flex w-full p-2 justify-between text-base font-medium cursor-pointer hover:text-[#46A358] transition-colors ${
+                  category === value.route_path && "text-[#46A358]"
+                }`}
               >
                 <div>{value.title}</div>
                 <div>({Math.abs(value.count)})</div>
