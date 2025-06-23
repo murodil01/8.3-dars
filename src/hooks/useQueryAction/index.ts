@@ -123,3 +123,19 @@ export const useLoginWithGoogleMutation = () => {
     },
   });
 };
+
+export const useGetCoupon = () => {
+  const axios = useAxios();
+  return useMutation({
+    mutationKey: ["coupon"],
+    mutationFn: (coupone_code: string) =>
+      axios({
+        url: "faetures/coupon",
+        params: { coupone_code },
+      }),
+    onSuccess(data) {
+      console.log(data);
+    },
+  });
+};
+

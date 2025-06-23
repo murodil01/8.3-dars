@@ -72,3 +72,16 @@ export interface ProductsTypeLocal extends ProductsType {
   count: number;
   userPrice: number;
 }
+
+export interface BlogType {
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  created_by: string;
+  views: number;
+  reaction_length: number;
+  created_at: string;
+}

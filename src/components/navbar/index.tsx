@@ -1,6 +1,6 @@
 import { Icons } from "../../assets/icons";
 import { Link } from "react-router-dom";
-import { LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
+import { Bell, LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setOpenAuthoritastionModalVisiblity } from "../../redux/modal-slice";
@@ -29,7 +29,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="w-[90%] m-auto py-4 flex items-center justify-between gap-4">
+    <header className="w-[90%] m-auto p-4 flex items-center justify-between gap-4 border-b border-[#46A358]">
       <Icons.Logo_Svg />
 
       <nav className="hidden md:flex gap-6 items-center">
@@ -48,11 +48,13 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         <Search className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
+        <Bell className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
         <Link to={"/shop"}>
           <Badge count={data.length}>
             <ShoppingCart className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
           </Badge>
         </Link>
+
         <button
           onClick={() => dispatch(setOpenAuthoritastionModalVisiblity())}
           className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-md

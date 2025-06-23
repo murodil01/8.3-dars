@@ -7,7 +7,7 @@ const ShopProducts = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between text-start border-b border-[#46A358] pb-3">
+      <div className="flex items-center justify-between text-start pb-3 border-b border-[#46A358] mb-[35px]">
         <h2 className="text-[#3D3D3D] text-[16px] font-medium pb-[10px] w-[40%]">
           Products
         </h2>
