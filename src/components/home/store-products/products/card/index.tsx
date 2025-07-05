@@ -7,14 +7,15 @@ import {
 } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { getData } from "../../../../../redux/shop-slice";
-import { useReduxSelector } from "../../../../../hooks/useRedux";
+import { useNavigate } from "react-router-dom";
+//import { useReduxSelector } from "../../../../../hooks/useRedux";
 
 const Card: FC<ProductsType> = (props) => {
   const dispatch = useDispatch();
-  const { data } = useReduxSelector((state) => state.shopSlice);
-  console.log(data);
-  
-
+  const navigate = useNavigate()
+  //const { data } = useReduxSelector((state) => state.shopSlice);
+  //console.log(data);
+    
   const style_icons: string =
     "bg-[#FFFFFF] w-[35px] h-[35px] flex rounded-lg justify-center items-center cursor-pointer text-[20px] shadow hover:scale-105 transition";
 
@@ -36,7 +37,7 @@ const Card: FC<ProductsType> = (props) => {
             <HeartOutlined className="text-[22px]" />
           </div>
 
-          <div className={style_icons}>
+          <div onClick={() => navigate(`/shop-info/${props.category}/${props._id}`)} className={style_icons}>
             <SearchOutlined className="text-[22px]" />
           </div>
         </div>

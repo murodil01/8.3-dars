@@ -66,6 +66,7 @@ export interface ProductsType {
   title: string;
   views: number;
   _id: string;
+  created_by: string;
 }
 
 export interface ProductsTypeLocal extends ProductsType {

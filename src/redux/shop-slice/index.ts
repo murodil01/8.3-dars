@@ -4,13 +4,15 @@ import { getLocal, setLocal } from "../../generic/generic";
 
 interface InitialStateType {
   data: ProductsTypeLocal[];
+  coupon: number; 
 }
 const initialState: InitialStateType = {
   data: getLocal("shop") || [],
+  coupon: 0,
 };
 
 export const shopSlice = createSlice({
-  initialState,
+  initialState, 
   name: "shop",
   reducers: {
     getData(state, { payload }) {
@@ -66,9 +68,12 @@ export const shopSlice = createSlice({
       );
       setLocal("shop", state.data);
     },
+    getCoupon(state, {payload}) {
+      state.coupon = payload;
+    }
   },
 });
 
-export const { getData, deleteData, increament, decreament } =
+export const { getData, deleteData, increament, decreament,  getCoupon } =
   shopSlice.actions;
 export default shopSlice.reducer;

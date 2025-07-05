@@ -4,6 +4,7 @@ import { Eye, MessageCircle, Heart } from "lucide-react";
 import { Input } from "antd";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
+import Feature from "../../components/features";
 
 const { Search } = Input;
 
@@ -72,14 +73,71 @@ const Blogs: React.FC = () => {
     setFilteredBlogs(results);
   };
 
+  const images = [
+    {
+      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_1.png?alt=media&token=8174091c-24b5-42a0-886d-845bd15cccb9",
+      alt: "blog_avatar_1",
+      mt: "mt-0",
+    },
+    {
+      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_2.png?alt=media&token=d2b8bf6f-7c67-4e93-b026-917f4291d9f6",
+      alt: "blog_avatar_2",
+      mt: "mt-[20px]",
+    },
+    {
+      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_3.png?alt=media&token=7abda4b5-0f9e-4fc1-8353-e32194b925c9",
+      alt: "blog_avatar_3",
+      mt: "mt-[50px]",
+    },
+    {
+      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_4.png?alt=media&token=2a9f4b03-30a0-4c89-b189-7c8835ab42e7",
+      alt: "blog_avatar_4",
+      mt: "mt-[20px]",
+    },
+    {
+      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_5.png?alt=media&token=f65d9df1-ea8b-4ebe-9d23-e3e768f0f701",
+      alt: "blog_avatar_5",
+      mt: "mt-0",
+    },
+  ];
+
   return (
     <div className="w-full">
       <Navbar />
+      <div className="w-[90%] m-auto h-[700px] p-[50px] bg-[#F5F5F5] mt-3 flex justify-between max-2xl:h-[300px] max-md:h-[150px]">
+        {images.map((img, index) => (
+          <img
+            key={index}
+            src={img.src}
+            alt={img.alt}
+            className={`w-[15%] h-full ${img.mt}`}
+          />
+        ))}
+      </div>
+
+      <div className="w-[90%] m-auto h-auto text-center py-12 px-6">
+        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
+          Monetize your content with{" "}
+          <span className="text-[#46A358]">GreenShop</span>
+        </h2>
+        <p className="text-gray-600 mb-6 text-base md:text-lg">
+          GreenShop — a platform for buying and selling, publishing and
+          monetizing all types of flowers: articles, notes, video, photos,
+          podcasts or songs.
+        </p>
+        <button className="bg-[#46A358] hover:bg-green-600 transition text-white font-medium px-6 py-3 rounded-lg shadow">
+          Join GreenShop
+        </button>
+      </div>
 
       <div className="my-6 max-w-[700px] mx-auto flex justify-center items-center">
         <Search
           placeholder="Kommentariyasi bor bloglarni izlang"
-          enterButton="Qidirish"
+          enterButton={
+            <button className="bg-[#46A358] text-white px-5 py-[11.5px] rounded-r-md">
+              Qidirish
+            </button>
+          }
           size="large"
           onSearch={onSearch}
         />
@@ -134,7 +192,7 @@ const Blogs: React.FC = () => {
           })
         )}
       </div>
-
+      <Feature />
       <Footer />
     </div>
   );

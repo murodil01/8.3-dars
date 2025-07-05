@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { setOpenAuthoritastionModalVisiblity } from "../../redux/modal-slice";
 import { notificationApi } from "../../generic/notificationApi";
 import { signInWithGoogle } from "../../config";
+import { getCoupon } from "../../redux/shop-slice";
 
 export const useLoginMutation = () => {
   const axios = useAxios();
@@ -124,18 +125,34 @@ export const useLoginWithGoogleMutation = () => {
   });
 };
 
-export const useGetCoupon = () => {
+/*export const useGetCoupon = () => {
   const axios = useAxios();
-  return useMutation({
+  const dispatch = useDispatch();
+  return useMutation({ 
     mutationKey: ["coupon"],
-    mutationFn: (coupone_code: string) =>
+    mutationFn: (coupon_code: string) =>
       axios({
         url: "faetures/coupon",
-        params: { coupone_code },
+        params: { coupon_code },
       }),
     onSuccess(data) {
-      console.log(data);
+      dispatch(getCoupon(data.discount_for));
+    },
+  });
+};*/
+
+export const useGetCoupon = () => {
+  const axios = useAxios();
+  const dispatch = useDispatch();
+  return useMutation({ 
+    mutationKey: ["coupon"],
+    mutationFn: (coupon_code: string) =>
+      axios({
+        url: "faetures/coupon",
+        params: { coupon_code },
+      }),
+    onSuccess(data) {
+      dispatch(getCoupon(data.discount_for));
     },
   });
 };
-
