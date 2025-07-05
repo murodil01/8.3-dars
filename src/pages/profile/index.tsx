@@ -33,7 +33,7 @@ const Profile = () => {
     } else {
       navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
   const handleLogout = () => {
     Cookies.remove("user");
