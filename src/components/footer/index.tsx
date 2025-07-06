@@ -2,7 +2,7 @@ import logo2 from "../../assets/images/logo2.svg";
 
 const Footer = () => {
   return (
-    <div className="max-w-[90%] m-auto">
+    <div className="w-[90%] m-auto">
       <div className=" bg-[#46A3581A] flex flex-col lg:flex-row justify-between items-start lg:items-center p-5 pl-8 gap-4">
         <div>
           <img src={logo2} alt="logo" />

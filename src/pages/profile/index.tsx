@@ -218,7 +218,7 @@ const Profile = () => {
       </main>
 
       <Feature />
-      <Footer />
+      <Footer/>
     </div>
   );
 };

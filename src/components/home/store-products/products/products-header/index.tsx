@@ -15,13 +15,15 @@ const ProductsHeader = () => {
   };
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-5">
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mt-4">
+      <div className="flex flex-wrap items-center gap-3 md:gap-5">
         {title_category.map((value) => (
           <h3
-            onClick={() => setParam({ category, sort, type: value.key,range_min,range_max })}
-            className={`cursor-pointer  ${
-              type === value.key && "text-[#46A358]"
+            onClick={() =>
+              setParam({ category, sort, type: value.key, range_min, range_max })
+            }
+            className={`cursor-pointer text-sm md:text-base ${
+              type === value.key && "text-[#46A358] font-semibold"
             }`}
             key={value.key}
           >
@@ -30,11 +32,12 @@ const ProductsHeader = () => {
         ))}
       </div>
 
-      <div className="flex items-center gap-2">
-        <h3>Sort by:</h3>
+      <div className="flex items-center gap-2 text-sm md:text-base">
+        <h3 className="whitespace-nowrap">Sort by:</h3>
         <Select
           onChange={handleChange}
           defaultValue={sort}
+          className="min-w-[150px]"
           options={[
             { value: "default-sorting", label: "Default Sorting" },
             { value: "the-cheapest", label: "The Cheapest" },
