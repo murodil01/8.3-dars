@@ -5,6 +5,7 @@ import { Input } from "antd";
 import Navbar from "../../components/navbar";
 import Footer from "../../components/footer";
 import Feature from "../../components/features";
+import { useNavigate } from "react-router-dom";
 
 const { Search } = Input;
 
@@ -23,6 +24,8 @@ const Blogs: React.FC = () => {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [filteredBlogs, setFilteredBlogs] = useState<BlogType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const navigate = useNavigate();
 
   const stripHtml = (html: string): string => html.replace(/<[^>]*>?/gm, "");
 
@@ -60,75 +63,29 @@ const Blogs: React.FC = () => {
   }, []);
 
   const onSearch = (value: string) => {
+    if (!value) {
+      setFilteredBlogs(blogs);
+      return;
+    }
     const results = blogs.filter((blog) => {
-      const titleMatch = blog.title
-        ?.toLowerCase()
-        .includes(value.toLowerCase());
-      const descMatch = blog.description
-        ?.toLowerCase()
-        .includes(value.toLowerCase());
-      return titleMatch || descMatch;
-    });
+      const title = blog.title || "";
+      const description = blog.description || "";
 
+      return (
+        title.toLowerCase().includes(value.toLowerCase()) ||
+        description.toLowerCase().includes(value.toLowerCase())
+      );
+    });
     setFilteredBlogs(results);
   };
 
-  const images = [
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_1.png?alt=media&token=8174091c-24b5-42a0-886d-845bd15cccb9",
-      alt: "blog_avatar_1",
-      mt: "mt-0",
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_2.png?alt=media&token=d2b8bf6f-7c67-4e93-b026-917f4291d9f6",
-      alt: "blog_avatar_2",
-      mt: "mt-[20px]",
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_3.png?alt=media&token=7abda4b5-0f9e-4fc1-8353-e32194b925c9",
-      alt: "blog_avatar_3",
-      mt: "mt-[50px]",
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_4.png?alt=media&token=2a9f4b03-30a0-4c89-b189-7c8835ab42e7",
-      alt: "blog_avatar_4",
-      mt: "mt-[20px]",
-    },
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/aema-image-upload.appspot.com/o/greenshop%2Fimages%2Fblog_avatar_5.png?alt=media&token=f65d9df1-ea8b-4ebe-9d23-e3e768f0f701",
-      alt: "blog_avatar_5",
-      mt: "mt-0",
-    },
-  ];
+  const handleNavigate = (id: string) => {
+    navigate(`/views/${id}`);
+  };
 
   return (
     <div className="w-full">
       <Navbar />
-      <div className="w-[90%] m-auto h-[700px] p-[50px] bg-[#F5F5F5] mt-3 flex justify-between max-2xl:h-[300px] max-md:h-[150px]">
-        {images.map((img, index) => (
-          <img
-            key={index}
-            src={img.src}
-            alt={img.alt}
-            className={`w-[15%] h-full ${img.mt}`}
-          />
-        ))}
-      </div>
-
-      <div className="w-[90%] m-auto h-auto text-center py-12 px-6">
-        <h2 className="text-3xl md:text-5xl font-bold text-gray-800 mb-4">
-          Monetize your content with{" "}
-          <span className="text-[#46A358]">GreenShop</span>
-        </h2>
-        <p className="text-gray-600 mb-6 text-base md:text-lg">
-          GreenShop — a platform for buying and selling, publishing and
-          monetizing all types of flowers: articles, notes, video, photos,
-          podcasts or songs.
-        </p>
-        <button className="bg-[#46A358] hover:bg-green-600 transition text-white font-medium px-6 py-3 rounded-lg shadow">
-          Join GreenShop
-        </button>
-      </div>
 
       <div className="my-6 max-w-[700px] mx-auto flex justify-center items-center">
         <Search
@@ -177,9 +134,13 @@ const Blogs: React.FC = () => {
                   )}
                 </div>
                 <div className="mt-4 flex justify-between items-center text-gray-500 text-sm border-t pt-2">
-                  <div className="flex items-center gap-1">
+                  <div
+                    onClick={() => handleNavigate(blog._id)}
+                    className="flex items-center gap-1 cursor-pointer"
+                  >
                     <Eye size={16} /> {blog.viewCount || 0}
                   </div>
+
                   <div className="flex items-center gap-1">
                     <MessageCircle size={16} /> {blog.commentCount || 0}
                   </div>
@@ -192,6 +153,7 @@ const Blogs: React.FC = () => {
           })
         )}
       </div>
+
       <Feature />
       <Footer />
     </div>

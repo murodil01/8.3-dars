@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAxios } from "../useAxios";
 import Cookies from "js-cookie";
 import type { AuthType } from "../../@types";
@@ -125,26 +125,10 @@ export const useLoginWithGoogleMutation = () => {
   });
 };
 
-/*export const useGetCoupon = () => {
-  const axios = useAxios();
-  const dispatch = useDispatch();
-  return useMutation({ 
-    mutationKey: ["coupon"],
-    mutationFn: (coupon_code: string) =>
-      axios({
-        url: "faetures/coupon",
-        params: { coupon_code },
-      }),
-    onSuccess(data) {
-      dispatch(getCoupon(data.discount_for));
-    },
-  });
-};*/
-
 export const useGetCoupon = () => {
   const axios = useAxios();
   const dispatch = useDispatch();
-  return useMutation({ 
+  return useMutation({
     mutationKey: ["coupon"],
     mutationFn: (coupon_code: string) =>
       axios({
@@ -156,3 +140,44 @@ export const useGetCoupon = () => {
     },
   });
 };
+
+interface BillingAddress {
+  country: string;
+  town: string;
+  street_address: string;
+  state: string;
+  zip: string;
+  extra_address: string;
+}
+
+export interface UserProfile {
+  _id: string;
+  name: string;
+  surname: string;
+  email: string;
+  phone_number: string;
+  username: string;
+  profile_photo: string;
+  billing_address: BillingAddress;
+  wishlist: { route_path: string; flower_id: string }[];
+  user_type: string;
+  created_at: string;
+}
+
+export const useGetProfile = () => {
+  const axios = useAxios();
+  const user = Cookies.get("user");
+
+  const userId = user ? JSON.parse(user)._id : null;
+
+  return useQuery<UserProfile>({
+    queryKey: ["user", userId],
+    queryFn: () =>
+      axios({
+        url: `user/by_id/${userId}`,
+        method: "GET",
+      }),
+    enabled: !!userId,
+  });
+};
+

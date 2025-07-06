@@ -1,100 +1,5 @@
-/*import { Icons } from "../../assets/icons";
-import { Link } from "react-router-dom";
-import { Bell, LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { setOpenAuthoritastionModalVisiblity } from "../../redux/modal-slice";
-import type { AuthType } from "../../@types";
-import Cookies from "js-cookie";
-import { Badge } from "antd";
-import { useReduxSelector } from "../../hooks/useRedux";
-
-const Navbar = () => {
-  const dispatch = useDispatch();
-  const [user, setUser] = useState<Partial<AuthType>>({});
-
-  const { data } = useReduxSelector((state) => state.shopSlice);
-
-  useEffect(() => {
-    if (Cookies.get("user")) {
-      const data: AuthType = JSON.parse(Cookies.get("user") as string);
-      setUser(data);
-    }
-  }, []);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const navLinks = [
-    { label: "Home", to: "/" },
-    { label: "Blogs", to: "/blogs" },
-  ];
-
-  return (
-    <header className="w-[90%] m-auto p-4 flex items-center justify-between gap-4 border-b border-[#46A358]">
-      <Icons.Logo_Svg />
-
-      <nav className="hidden md:flex gap-6 items-center">
-        {navLinks.map(({ label, to }) => (
-          <Link
-            key={label}
-            to={to}
-            className="relative font-normal text-base leading-none text-[#3D3D3D] hover:text-[#2e2e2e] cursor-pointer 
-              after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full 
-              after:h-[2px] after:bg-green-600 after:transition-all after:duration-300"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="flex items-center gap-4">
-        <Search className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-        <Bell className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-        <Link to={"/shop"}>
-          <Badge count={data.length}>
-            <ShoppingCart className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-          </Badge>
-        </Link>
-
-        <button
-          onClick={() => dispatch(setOpenAuthoritastionModalVisiblity())}
-          className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-md
-            flex items-center justify-center gap-2 hover:bg-green-700 transition-all duration-200"
-        >
-          <LogOut className="w-[20px] h-[20px] text-white" />
-          <span className="font-medium text-base leading-none text-white">
-            {user.name ? user.name : "Login"}
-          </span>
-        </button>
-
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div className="md:hidden px-4 pb-4">
-          <nav className="flex flex-col gap-4 mt-2">
-            {navLinks.map(({ label, to }) => (
-              <Link
-                key={label}
-                to={to}
-                onClick={() => setMenuOpen(false)}
-                className="text-[#3D3D3D] font-medium text-base border-b border-gray-200 pb-2"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
-  );
-};
-
-export default Navbar;*/
-
 import { Icons } from "../../assets/icons";
-import { Link, useNavigate } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom";
 import { Bell, LogOut, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -133,63 +38,105 @@ const Navbar = () => {
   };
 
   return (
-    <header className="w-[90%] m-auto p-4 flex items-center justify-between gap-4 border-b border-[#46A358]">
-      <Icons.Logo_Svg />
-
-      <nav className="hidden md:flex gap-6 items-center">
-        {navLinks.map(({ label, to }) => (
-          <Link
-            key={label}
-            to={to}
-            className="relative font-normal text-base leading-none text-[#3D3D3D] hover:text-[#2e2e2e] cursor-pointer 
-              after:content-[''] after:absolute after:left-0 after:-bottom-1 after:w-0 hover:after:w-full 
-              after:h-[2px] after:bg-green-600 after:transition-all after:duration-300"
-          >
-            {label}
-          </Link>
-        ))}
-      </nav>
-
-      <div className="flex items-center gap-4">
-        <Search className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-        <Bell className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-        <Link to={"/shop"}>
-          <Badge count={data.length}>
-            <ShoppingCart className="w-[20px] h-[20px] text-[#3D3D3D] cursor-pointer" />
-          </Badge>
+    <header className="w-full bg-white shadow-sm sticky top-0 z-50">
+      <div className="w-[90%] max-w-[1350px] mx-auto flex items-center justify-between gap-4 py-4 md:py-5">
+        <Link to="/" aria-label="Go to homepage" className="flex-shrink-0">
+          <Icons.Logo_Svg className="w-[150px] h-auto" />
         </Link>
 
-        <button
-          onClick={handleLoginClick}
-          className="w-[100px] h-[35px] bg-[#46A358] text-white border-2 border-[#46A358] rounded-md
-            flex items-center justify-center gap-2 hover:bg-green-700 transition-all duration-200"
-        >
-          <LogOut className="w-[20px] h-[20px] text-white" />
-          <span className="font-medium text-base leading-none text-white">
-            {user.name ? user.name : "Login"}
-          </span>
-        </button>
+        <nav className="hidden md:flex gap-8 items-center font-semibold text-gray-700">
+          {navLinks.map(({ label, to }) => (
+            <Link
+              key={label}
+              to={to}
+              className="relative group cursor-pointer hover:text-green-700 transition"
+            >
+              {label}
+              <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-green-600 transition-all group-hover:w-full"></span>
+            </Link>
+          ))}
+        </nav>
 
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex items-center gap-4 md:gap-6">
+          <button
+            aria-label="Search"
+            className="p-2 rounded-md hover:bg-gray-100 transition"
+          >
+            <Search className="w-5 h-5 text-gray-600" />
+          </button>
+
+          <button
+            aria-label="Notifications"
+            className="p-2 rounded-md hover:bg-gray-100 transition"
+          >
+            <Bell className="w-5 h-5 text-gray-600" />
+          </button>
+
+          <Link
+            to="/shop"
+            aria-label="Go to shopping cart"
+            className="relative"
+          >
+            <Badge
+              count={data.length}
+              size="small"
+              offset={[0, 4]}
+              showZero={false}
+              className="cursor-pointer"
+            >
+              <ShoppingCart className="w-5 h-5 text-gray-600 hover:text-green-700 transition" />
+            </Badge>
+          </Link>
+
+          <button
+            onClick={handleLoginClick}
+            className="hidden md:flex items-center gap-2 bg-green-600 hover:bg-green-700 transition text-white px-4 py-2 rounded-md font-semibold select-none"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>{user.name ? user.name : "Login"}</span>
+          </button>
+
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="md:hidden p-2 rounded-md hover:bg-gray-100 transition"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            {menuOpen ? (
+              <X className="w-6 h-6 text-gray-700" />
+            ) : (
+              <Menu className="w-6 h-6 text-gray-700" />
+            )}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4">
-          <nav className="flex flex-col gap-4 mt-2">
+        <nav className="md:hidden bg-white border-t border-gray-200 shadow-sm">
+          <ul className="flex flex-col gap-2 px-6 py-4">
             {navLinks.map(({ label, to }) => (
-              <Link
-                key={label}
-                to={to}
-                onClick={() => setMenuOpen(false)}
-                className="text-[#3D3D3D] font-medium text-base border-b border-gray-200 pb-2"
-              >
-                {label}
-              </Link>
+              <li key={label}>
+                <Link
+                  to={to}
+                  onClick={() => setMenuOpen(false)}
+                  className="block w-full py-2 text-gray-700 font-medium border-b border-gray-100 hover:text-green-600 transition"
+                >
+                  {label}
+                </Link>
+              </li>
             ))}
-          </nav>
-        </div>
+            <li>
+              <button
+                onClick={() => {
+                  handleLoginClick();
+                  setMenuOpen(false);
+                }}
+                className="w-full text-left text-green-700 font-semibold py-2 border-b border-gray-100 hover:bg-green-50 rounded transition"
+              >
+                {user.name ? `Profile (${user.name})` : "Login"}
+              </button>
+            </li>
+          </ul>
+        </nav>
       )}
     </header>
   );

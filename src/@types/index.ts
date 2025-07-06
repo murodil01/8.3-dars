@@ -86,3 +86,22 @@ export interface BlogType {
   reaction_length: number;
   created_at: string;
 }
+
+export interface ProfileProductType {
+  _id: string;
+  title: string;
+  price: number;
+  discount: boolean;
+  discount_price: string;
+  short_description: string;
+  description: string;
+  main_image: string;
+  detailed_images: string[];
+  rate: number;
+  views: number;
+  tags: string[];
+  comments: string[];
+  created_by: string;
+  created_at: string;
+  sold_times: number;
+}

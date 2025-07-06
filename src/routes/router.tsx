@@ -4,6 +4,7 @@ import Shop from "../pages/shop";
 import ShopInfo from "../pages/shop-info";
 import Blogs from "../pages/blogs";
 import Profile from "../pages/profile";
+import Views from "../pages/views";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
   {
     path: "/blogs",
     element: <Blogs />,
+  },
+  {
+    path: "/views/:id", 
+    element: <Views />,
   },
   {
     path: "/profile",

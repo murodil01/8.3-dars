@@ -3,7 +3,14 @@ import Products from "./products";
 
 const StoreProducts = () => {
   return (
-    <div className="max-w-[90%] m-auto grid grid-cols-[1fr_3fr] gap-5 mt-10">
+    <div
+      className="
+        w-[90%] mx-auto mt-10 
+        grid gap-5 
+        grid-cols-1 
+        md:grid-cols-[1fr_3fr]
+      "
+    >
       <Categories />
       <Products />
     </div>
